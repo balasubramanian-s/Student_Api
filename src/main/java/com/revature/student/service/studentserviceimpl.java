@@ -1,6 +1,5 @@
 package com.revature.student.service;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.student.DAO.studentdao;
 import com.revature.student.DTO.InsertDTO;
 import com.revature.student.DTO.UpdateDTO;
+import com.revature.student.model.Organization;
 import com.revature.student.model.student;
 
 @Service
@@ -18,7 +18,10 @@ public class studentserviceimpl implements studentservice {
 
 	@Autowired
 	private studentdao studdao;
+
+	private Organization org = new Organization();
 	
+
 	@Transactional
 	@Override
 	public List<student> get() {
@@ -28,46 +31,52 @@ public class studentserviceimpl implements studentservice {
 	@Transactional
 	@Override
 	public void insert(InsertDTO idto) {
+		Organization org = new Organization();
 		student stud = new student();
-		stud.setInstitutionid(idto.getInstitutionid());
+		org.setId(idto.getInstitutionid());
+		stud.setOrg(org);
 		stud.setRedgno(idto.getRedgno());
 		stud.setFname(idto.getFname());
 		stud.setLname(idto.getLname());
 		stud.setDob(idto.getDob());
 		stud.setYear(idto.getYear());
 		stud.setMobileno(idto.getMobileno());
-		stud.setEmail(idto.getEmail()	);
+		stud.setEmail(idto.getEmail());
 		LocalDateTime ldt = LocalDateTime.now();
 		stud.setCreatedon(ldt);
 		System.out.println("Before");
 		studdao.insert(stud);
 		System.out.println("After");
-		
-		
+
 	}
 
 	@Transactional
 	@Override
 	public void delete(int id) {
 		studdao.delete(id);
-		
+
 	}
 
+	@Transactional
 	@Override
 	public List<student> getstudbyInst(int institutionid) {
 		return studdao.getstudbyInst(institutionid);
 	}
 
+	@Transactional
 	@Override
 	public List<student> getstudbyInstYear(int institutionid, int year) {
-		return studdao.getstudbyInstYear(institutionid,year);
+		return studdao.getstudbyInstYear(institutionid, year);
 	}
 
+	@Transactional
 	@Override
 	public void update(UpdateDTO udto) {
-		student stud = new student();
+		Organization org = new Organization();
+		student stud = get(udto.getId());
+		org.setId(udto.getInstitutionid());
 		stud.setId(udto.getId());
-		stud.setInstitutionid(udto.getInstitutionid());
+		stud.setOrg(org);
 		stud.setRedgno(udto.getRedgno());
 		stud.setFname(udto.getFname());
 		stud.setLname(udto.getLname());
@@ -75,11 +84,16 @@ public class studentserviceimpl implements studentservice {
 		stud.setYear(udto.getYear());
 		stud.setMobileno(udto.getMobileno());
 		stud.setEmail(udto.getEmail());
+		stud.setModifiedon(udto.getModifiedon());
 		System.out.println("Before");
-		studdao.update(stud);
-		System.out.println("After");		
+		studdao.insert(stud);
+		System.out.println("After");
 	}
 
-
+	@Override
+	public student get(int id) {
+		
+		return studdao.get(id);
+	}
 
 }

@@ -27,7 +27,7 @@ public class studentdaoimpl implements studentdao {
 	@Override
 	public void insert(student stud) {
 		Session currentSession=entityManager.unwrap(Session.class);
-		currentSession.save(stud);
+		currentSession.saveOrUpdate(stud);
 	}
 
 	@Override
@@ -60,6 +60,13 @@ public class studentdaoimpl implements studentdao {
 		currentSession.update(stud);
 		System.err.println(stud);
 //		currentSession.flush();
+	}
+
+	@Override
+	public student get(int id) {
+		Session currentSession=entityManager.unwrap(Session.class);
+		student obj=currentSession.get(student.class,id);
+		return obj;
 	}
 
 

@@ -9,6 +9,7 @@ import com.revature.student.model.student;
 public interface studentservice {
 
 	public List<student> get();
+	public student get(int id);
 	public void delete(int id);
 	public List<student> getstudbyInst(int institutionid);
 	public List<student> getstudbyInstYear(int institutionid, int year);

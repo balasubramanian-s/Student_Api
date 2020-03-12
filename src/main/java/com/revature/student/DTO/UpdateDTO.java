@@ -2,6 +2,10 @@ package com.revature.student.DTO;
 
 import java.sql.Date;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class UpdateDTO {
 	private Integer id;
 	private Integer institutionid;
@@ -12,6 +16,8 @@ public class UpdateDTO {
 	private Integer year;
 	private Long mobileno;
 	private String email;
+	@JsonIgnore
+	private LocalDateTime modifiedon=LocalDateTime.now();
 	
 
 	public Integer getId() {
@@ -67,5 +73,11 @@ public class UpdateDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public LocalDateTime getModifiedon() {
+		return modifiedon;
+	}
+	public void setModifiedon(LocalDateTime modifiedon) {
+		this.modifiedon = modifiedon;
 	}
 }

@@ -19,34 +19,38 @@ import com.revature.student.model.student;
 import com.revature.student.service.studentservice;
 
 @RestController
-@RequestMapping("/stud")
+@RequestMapping("/student")
 @CrossOrigin(origins = "*")
 public class studentcontroller {
 	@Autowired 
 	private studentservice studservice;
 	
-	@GetMapping("/getstud")
+	@GetMapping("/getall")
 	public List<student>get(){
 		return studservice.get();
 	}
-	
-	@GetMapping("/getstud/institution/{institutionid}")
-	public List<student>getstudbyInst(@PathVariable int institutionid) {
-		
-		return studservice.getstudbyInst(institutionid);
+	@GetMapping("/get/{id}")
+	public student get(@PathVariable Integer id) {
+		return studservice.get(id);
 	}
 	
-	@GetMapping("getstud/instyearwise/{institutionid}/{year}")
+	@GetMapping("/institution/{inst_id}")
+	public List<student>getstudbyInst(@PathVariable int inst_id) {
+		
+		return studservice.getstudbyInst(inst_id);
+	}
+	
+	@GetMapping("/year/{institutionid}/{year}")
 	public List<student>getstudbyInstYear(@PathVariable int institutionid,@PathVariable int year){
 		return studservice.getstudbyInstYear(institutionid,year);
 	}
 	
-	@PostMapping("/insert")
+	@PostMapping("/addStudent")
 	public void save(@RequestBody InsertDTO idto) {
 		studservice.insert(idto);
 	}
 	
-	@PutMapping("/update")
+	@PutMapping("/updateStudent")
 	public void update(@RequestBody UpdateDTO udto) {
 		studservice.update(udto);
 	}
