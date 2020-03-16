@@ -3,7 +3,10 @@ package com.revature.student.DTO;
 import java.sql.Date;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class InsertDTO {
+	private Integer id;
 	private Integer institutionid;
 	private Long redgno;
 	private String fname;
@@ -12,6 +15,11 @@ public class InsertDTO {
 	private Integer year;
 	private Long mobileno;
 	private String email;
+	
+	@JsonIgnore
+	private LocalDateTime createdon=LocalDateTime.now();
+	@JsonIgnore
+	private LocalDateTime modifiedon=LocalDateTime.now();
 
 	public Integer getInstitutionid() {
 		return institutionid;
@@ -60,6 +68,30 @@ public class InsertDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public LocalDateTime getCreatedon() {
+		return createdon;
+	}
+	public void setCreatedon(LocalDateTime createdon) {
+		this.createdon = createdon;
+	}
+	public LocalDateTime getModifiedon() {
+		return modifiedon;
+	}
+	public void setModifiedon(LocalDateTime modifiedon) {
+		this.modifiedon = modifiedon;
+	}
+	@Override
+	public String toString() {
+		return "InsertDTO [id=" + id + ", institutionid=" + institutionid + ", redgno=" + redgno + ", fname=" + fname
+				+ ", lname=" + lname + ", dob=" + dob + ", year=" + year + ", mobileno=" + mobileno + ", email=" + email
+				+ ", createdon=" + createdon + ", modifiedon=" + modifiedon + "]";
 	}
 	
 	

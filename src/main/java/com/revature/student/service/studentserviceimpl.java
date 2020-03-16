@@ -19,9 +19,6 @@ public class studentserviceimpl implements studentservice {
 	@Autowired
 	private studentdao studdao;
 
-	private Organization org = new Organization();
-	
-
 	@Transactional
 	@Override
 	public List<student> get() {
@@ -30,9 +27,19 @@ public class studentserviceimpl implements studentservice {
 
 	@Transactional
 	@Override
-	public void insert(InsertDTO idto) {
+	public void save(InsertDTO idto) {
+		
 		Organization org = new Organization();
 		student stud = new student();
+		if(idto.getId()==null) {
+			stud.setCreatedon(idto.getCreatedon());			
+		}
+		else {
+			stud=studdao.get(idto.getId());
+			stud.setModifiedon(idto.getModifiedon());
+			stud.setId(idto.getId());
+		}
+		
 		org.setId(idto.getInstitutionid());
 		stud.setOrg(org);
 		stud.setRedgno(idto.getRedgno());
@@ -41,9 +48,8 @@ public class studentserviceimpl implements studentservice {
 		stud.setDob(idto.getDob());
 		stud.setYear(idto.getYear());
 		stud.setMobileno(idto.getMobileno());
-		stud.setEmail(idto.getEmail());
-		LocalDateTime ldt = LocalDateTime.now();
-		stud.setCreatedon(ldt);
+		stud.setEmail(idto.getEmail());		
+		
 		System.out.println("Before");
 		studdao.insert(stud);
 		System.out.println("After");
@@ -73,7 +79,8 @@ public class studentserviceimpl implements studentservice {
 	@Override
 	public void update(UpdateDTO udto) {
 		Organization org = new Organization();
-		student stud = get(udto.getId());
+		student stud = studdao.get(udto.getId());
+		System.out.println(stud);
 		org.setId(udto.getInstitutionid());
 		stud.setId(udto.getId());
 		stud.setOrg(org);
@@ -85,14 +92,14 @@ public class studentserviceimpl implements studentservice {
 		stud.setMobileno(udto.getMobileno());
 		stud.setEmail(udto.getEmail());
 		stud.setModifiedon(udto.getModifiedon());
-		System.out.println("Before");
+		System.out.println(stud);
 		studdao.insert(stud);
-		System.out.println("After");
+		System.out.println(stud);
 	}
 
 	@Override
 	public student get(int id) {
-		
+
 		return studdao.get(id);
 	}
 

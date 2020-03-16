@@ -14,7 +14,7 @@ public interface studentservice {
 	public List<student> getstudbyInst(int institutionid);
 	public List<student> getstudbyInstYear(int institutionid, int year);
 	public void update(UpdateDTO udto);
-	public void insert(InsertDTO idto);
+	public void save(InsertDTO idto);
 
 	
 

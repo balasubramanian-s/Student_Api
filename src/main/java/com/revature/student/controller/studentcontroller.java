@@ -47,12 +47,12 @@ public class studentcontroller {
 	
 	@PostMapping("/addStudent")
 	public void save(@RequestBody InsertDTO idto) {
-		studservice.insert(idto);
+		studservice.save(idto);
 	}
 	
 	@PutMapping("/updateStudent")
-	public void update(@RequestBody UpdateDTO udto) {
-		studservice.update(udto);
+	public void update(@RequestBody InsertDTO udto) {
+		studservice.save(udto);
 	}
 	
 	@DeleteMapping("/delete/{id}")
