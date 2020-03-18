@@ -103,4 +103,10 @@ public class studentserviceimpl implements studentservice {
 		return studdao.get(id);
 	}
 
+	@Override
+	public List<student> getstudbyYear(int year) {
+		
+		return studdao.getstudbyYear(year);
+	}
+
 }

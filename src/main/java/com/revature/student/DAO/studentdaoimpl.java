@@ -69,6 +69,16 @@ public class studentdaoimpl implements studentdao {
 		return obj;
 	}
 
+	@Override
+	public List<student> getstudbyYear(int year) {
+		Session currentSession=entityManager.unwrap(Session.class);
+		Query<student> query=  currentSession.createQuery("from student Where year="+year,student.class);
+		List<student> list=query.getResultList();		
+		return list;
+
+		
+	}
+
 
 
 	

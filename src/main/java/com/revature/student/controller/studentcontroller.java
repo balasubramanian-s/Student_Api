@@ -44,7 +44,10 @@ public class studentcontroller {
 	public List<student>getstudbyInstYear(@PathVariable int institutionid,@PathVariable int year){
 		return studservice.getstudbyInstYear(institutionid,year);
 	}
-	
+	@GetMapping("/year/{year}")
+	public List<student>getstudbyYear(@PathVariable int year){
+		return studservice.getstudbyYear(year);
+	}
 	@PostMapping("/addStudent")
 	public void save(@RequestBody InsertDTO idto) {
 		studservice.save(idto);

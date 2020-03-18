@@ -17,6 +17,8 @@ public interface studentdao {
 	public List<student> getstudbyInst(int institutionid);
 
 	public List<student> getstudbyInstYear(int institutionid, int year);
+	
+	public List<student> getstudbyYear(int year);
 
 	public void update(student stud);
 
