@@ -2,25 +2,26 @@ package com.revature.student.DAO;
 
 import java.util.List;
 
+import com.revature.student.exception.DBException;
 import com.revature.student.model.student;
 
 public interface studentdao {
 
-	public List<student> get();
+	public List<student> get()  throws DBException;
 	
-	public student get(int id);
+	public student get(int id) throws DBException;
 	
-	public void insert(student stud);
+	public void insert(student stud) throws DBException;
 
-	public  void delete(int id);
+	public  void delete(int id) throws DBException;
 
-	public List<student> getstudbyInst(int institutionid);
+	public List<student> getstudbyInst(int institutionid) throws DBException;
 
-	public List<student> getstudbyInstYear(int institutionid, int year);
+	public List<student> getstudbyInstYear(int institutionid, int year) throws DBException;
 	
-	public List<student> getstudbyYear(int year);
+	public List<student> getstudbyYear(int year) throws DBException;
 
-	public void update(student stud);
+	public void update(student stud) throws DBException;
 
 		
 		
